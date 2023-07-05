@@ -40,15 +40,15 @@ survey_df['prep-positive'] = survey_df['Positive'].apply(preprocess)
 survey_df['prep-negative'] = survey_df['Negative'].apply(preprocess)
 survey_df['prep-want'] = survey_df['Short-Term Want'].apply(preprocess)
 
-positive_df = pd.DataFrame(Counter(" ".join(survey_df["prep-positive"]).split()).most_common(20))
+positive_df = pd.DataFrame(Counter(" ".join(survey_df["prep-positive"]).split()).most_common(15))
 positive_df.rename(columns={0: 'word', 1: 'count'}, inplace=True)
 positive_df.to_csv('positive.csv', index=False)
 
-negative_df = pd.DataFrame(Counter(" ".join(survey_df["prep-negative"]).split()).most_common(20))
+negative_df = pd.DataFrame(Counter(" ".join(survey_df["prep-negative"]).split()).most_common(15))
 negative_df.rename(columns={0: 'word', 1: 'count'}, inplace=True)
 negative_df.to_csv('negative.csv', index=False)
 
-want_df = pd.DataFrame(Counter(" ".join(survey_df["prep-want"]).split()).most_common(20))
+want_df = pd.DataFrame(Counter(" ".join(survey_df["prep-want"]).split()).most_common(10))
 want_df.rename(columns={0: 'word', 1: 'count'}, inplace=True)
 want_df.to_csv('want.csv', index=False)
 
