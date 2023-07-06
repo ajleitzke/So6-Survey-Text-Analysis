@@ -17,6 +17,7 @@ with open(stop_words_file, "r") as f:
 
 stop_words = stop_words
 
+
 def preprocess(raw_text):
     letters_only_text = re.sub("[^a-zA-Z]", " ", str(raw_text))
 
