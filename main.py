@@ -52,5 +52,3 @@ negative_df.to_csv('negative.csv', index=False)
 want_df = pd.DataFrame(Counter(" ".join(survey_df["prep-want"]).split()).most_common(10))
 want_df.rename(columns={0: 'word', 1: 'count'}, inplace=True)
 want_df.to_csv('want.csv', index=False)
-
-print(positive_df, negative_df, want_df)
