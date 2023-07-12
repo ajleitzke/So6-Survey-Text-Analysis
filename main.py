@@ -3,19 +3,18 @@ from collections import Counter
 import pandas as pd
 from nltk.stem import WordNetLemmatizer
 import os
+from dotenv import load_dotenv
 
-url = os.environ.get("url")
+load_dotenv()
 
-survey_df = pd.read_csv(
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTSi45lc_B_sFsPEqSqceMAdU42sZaEH_zc5wH_tmtTK0ZPN0dnP3J5u0F1XSAz5-ui35q4WaagBt1o/pub?gid=0&single=true&output=csv')
+url = os.getenv('url')
+survey_df = pd.read_csv(url)
 stop_words_file = 'stopwords.txt'
 stop_words = []
 
 with open(stop_words_file, "r") as f:
     for line in f:
         stop_words.extend(line.split())
-
-stop_words = stop_words
 
 
 def preprocess(raw_text):
@@ -29,12 +28,12 @@ def preprocess(raw_text):
         if word not in stop_words:
             cleaned_words.append(word)
 
-    stemmed_words = []
+    lemmatized_words = []
     for word in cleaned_words:
         word = WordNetLemmatizer().lemmatize(word)
-        stemmed_words.append(word)
+        lemmatized_words.append(word)
 
-    return " ".join(stemmed_words)
+    return " ".join(lemmatized_words)
 
 
 survey_df['prep-positive'] = survey_df['Positive'].apply(preprocess)
